@@ -14,6 +14,20 @@ body {
   margin: 5px;
 }
 
+.header {
+  margin-bottom: 5rem;
+}
+
+.tip {
+  color: gold;
+  opacity: 0.5;
+}
+
+label {
+  color: gold;
+  opacity: 0.5;
+}
+
 button {
   cursor: pointer;
   color: gold;

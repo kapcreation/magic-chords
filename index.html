@@ -9,8 +9,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 class="title">Magic Eden</h1>
-  <div id="song-list"></div>
+  <div class="header">
+    <h1 class="title">Magic Eden</h1>
+    <p class="tip" id="tip"></p>
+    <div id="song-list"></div>
+
+    <label for="volume-slider">Volume:</label>
+    <input type="range" min="0" max="100" value="50" id="volume-slider">
+  </div>
 
   <iframe id="video" class="video" height="255" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
  
