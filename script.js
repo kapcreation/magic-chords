@@ -119,7 +119,6 @@ for (let i = 0; i < notes.length; i++) {
 }
 
 const tip = document.querySelector("#tip")
-const video = document.querySelector("#video")
 const form = document.querySelector('#form')
 const chordInput = document.querySelector('#chord-input')
 const volumeSlider = document.querySelector("#volume-slider");
@@ -129,8 +128,6 @@ let audioVolume = 0.5
 tip.innerText = `Songs: https://chordify.net/ \n Available Chords: ${chords.map(obj => obj.key).join(", ")} \n Keys: Space = Bass | ; = Play | y = kick | h = snare | n = hihat`
 
 let currentChord = null
-
-video.classList.add("hidden")
 
 function chordIsExist(chord) {
   return chords.some(item => item.key === chord)
@@ -160,17 +157,13 @@ function play() {
   if (chord) chord = chord.charAt(0).toUpperCase() + chord.slice(1)
   
   if (!chord || !chordIsExist(chord)) {
-    if (!sheetIsOpen) {
-      if (!chord && currentChord) {
-        chord = currentChord
-      } else {
-        form.reset()
-        return
-      }
+    if (!chord && currentChord) {
+      chord = currentChord
+    } else {
+      form.reset()
+      return
     }
-    else chord = songs[selectedSongIndex].waves[wave].chord
   }
-  
   
   const chordNotes = chords.find(item => item.key === chord).notes
 
@@ -180,24 +173,10 @@ function play() {
 
     playAudio(index)
   }
-
-
-
-  chord = chord.replace(/\//g, "-");
-  if (chord.includes("#")) chord = encodeURIComponent(chord)
   
   currentChord = chord
   
-  // console.log(chord)
-  // var audio = new Audio(`assets/${chord}.mp3`);
-  // audio.play()
-  
   form.reset()
-
-  if (sheetIsOpen) {
-    wave++
-    changeSheet(selectedSongIndex)
-  }
 }
 
 form.addEventListener('submit', (e) => {
@@ -212,7 +191,7 @@ document.addEventListener('keydown', function(event) {
     playBass(chordInput.value || currentChord)
   }
 
-  // press ; top play chord
+  // press ; to play chord
   if (event.keyCode === 186 || event.which === 186) {
     event.preventDefault();
     play()
@@ -262,70 +241,3 @@ document.addEventListener('keydown', function(event) {
   }
 
 });
-
-
-
-let sheetIsOpen = false
-const sheet = document.querySelector("#sheet")
-const sheetChord = document.querySelector("#sheet-chord")
-const sheetChordNext = document.querySelector("#sheet-chord-next")
-const sheetP = document.querySelector("#sheet-p")
-const waveEl = document.querySelector("#wave")
-
-sheet.classList.add("hidden")
-
-let wave = 0
-let selectedSongIndex = 0;
-
-
-function changeSheet() {
- 
-  let currentSheet = songs[selectedSongIndex].waves[wave]
-
-  if (!currentSheet) {
-    wave = 0
-    currentSheet = songs[selectedSongIndex].waves[wave]
-  }
-
-  const nextSheet = songs[selectedSongIndex].waves[wave + 1]
-
-  sheetChordNext.classList.remove("hidden")
-
-  sheetChord.innerText = currentSheet.chord
-
-  chordInput.placeholder = currentSheet.chord
-
-  if (nextSheet) sheetChordNext.innerText = nextSheet.chord
-  else sheetChordNext.classList.add("hidden")
-
-  sheetP.innerHTML = currentSheet.p +( nextSheet ? `<span class="p-next" id="p-next"> ${nextSheet.p}</span>` : "")
-  waveEl.innerText = wave
-}
-
-
-const songList = document.querySelector("#song-list")
-
-for (let i = 0; i < songs.length; i++) {
-  const songEl = document.createElement("button")
-  songEl.classList.add("song-btn")
-  songEl.innerText = songs[i].name
-  songEl.addEventListener("click", (e)=> {
-    //open a song
-    sheet.classList.remove("hidden")
-    wave = 0
-    selectedSongIndex = i
-    changeSheet()
-    chordInput.focus()
-
-    if (songs[i].src) {
-      video.classList.remove("hidden")
-      video.src = songs[i].src
-    } else {
-      video.classList.add("hidden")
-    }
-
-    sheetIsOpen = true
-  })
-  
-  songList.append(songEl)
-}

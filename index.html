@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
   <title>Magic Eden</title>
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
@@ -15,24 +16,13 @@
     <div id="song-list"></div>
 
     <label for="volume-slider">Volume:</label>
-    <input type="range" min="0" max="100" value="50" id="volume-slider">
+    <input type="range" min="0" max="100" value="70" id="volume-slider">
   </div>
-
-  <iframe id="video" class="video" height="255" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
- 
 
   <form class="form" id="form">
     <label for="chord-input">Chord:</label>
     <input type="text" id="chord-input" name="chord-input" autofocus>
   </form>
 
-  <div class="sheet" id="sheet">
-    <p class="sheet-page" id="wave">0</p>
-    <div class="chord" id="sheet-chord">Fm</div>
-    <div class="chord chord-next" id="sheet-chord-next">Db</div>
-    <p class="p" id="sheet-p">
-      Life blooms
-    </p>
-  </div>
 </body>
 </html>
