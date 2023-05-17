@@ -136,6 +136,8 @@ function playBass() {
 
 function play() {
   let chord = chordInput.value
+
+  if (chord) playBass()
   
   if (chord) chord = chord.charAt(0).toUpperCase() + chord.slice(1)
   
@@ -194,7 +196,6 @@ document.addEventListener('keydown', function(event) {
 
   if (event.keyCode === 186 || event.which === 186) {
     event.preventDefault();
-    playBass()
     play()
   }
 
