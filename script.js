@@ -241,3 +241,46 @@ document.addEventListener('keydown', function(event) {
   }
 
 });
+
+
+
+// =========================== YouTube player ==================================
+
+// Define the player globally to make it accessible by the function
+var player;
+
+// YouTube Player API callback function
+function onYouTubeIframeAPIReady() {
+  // Create the YouTube player
+  player = new YT.Player('player', {
+    height: '250',
+    width: '440',
+    videoId: 'wKVJi-FLvak',
+    playerVars: {
+      start: 0 // Default start time is 0 seconds
+    },
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
+}
+
+// Triggered when the player is ready
+function onPlayerReady(event) {
+  event.target.playVideo();
+}
+
+// Function to change the video timestamp
+function changeTimestamp(timestamp) {
+  player.seekTo(timestamp);
+}
+
+
+// ==================================== chord-bar ============================================
+
+function myFunction() {
+  console.log('Function called!');
+}
+
+// Call myFunction every 1 second (1000 milliseconds)
+setInterval(myFunction, 1000);

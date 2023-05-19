@@ -47,9 +47,45 @@ button {
   margin: 2px;
 }
 
-.video {
-  display: block;
-  margin: auto;
+.player-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.chord-bar {
+  width: 80%;
+  
+  margin: 0 auto;
+  background-color: #999;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 5px;
+}
+
+.chord-bar__content {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 2px;
+}
+
+.chord-bar__tile {
+  flex-shrink: 0;
+  width: 55px;
+  height: 55px;
+  border-radius: 5px;
+  background-color: white;
+  color: #111;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  font-weight: bold;
+}
+
+.chord-bar__tile.active {
+  background-color: #111;
+  color: white;
 }
 
 .form {
